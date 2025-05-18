@@ -1,0 +1,21 @@
+# export .dll
+extern "C" {
+
+    __declspec(dllexport)intadd(int a,int b)
+
+    {
+
+       int c;
+
+       c = a + b;
+
+       return c;
+
+    }
+
+}
+
+# import .dll 
+
+[DllImport("add.dll", CallingConvention = CallingConvention.Cdecl)]
+public static extern int add(int a,int b);
