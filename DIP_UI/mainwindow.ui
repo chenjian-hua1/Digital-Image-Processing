@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1127</width>
+    <height>601</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1127</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuIP">
+    <property name="title">
+     <string>IP</string>
+    </property>
+    <widget class="QMenu" name="menuBinary">
+     <property name="title">
+      <string>Binary</string>
+     </property>
+     <addaction name="actionOTSU"/>
+    </widget>
+    <widget class="QMenu" name="menuFilter">
+     <property name="title">
+      <string>Filter</string>
+     </property>
+     <addaction name="actionCustomize"/>
+     <addaction name="actionSobel"/>
+     <addaction name="actionPrewitt"/>
+     <addaction name="actionMedian"/>
+    </widget>
+    <widget class="QMenu" name="menuMorpology">
+     <property name="title">
+      <string>Morpology</string>
+     </property>
+     <addaction name="actionDilation"/>
+     <addaction name="actionErosion"/>
+     <addaction name="actionOpen_2"/>
+     <addaction name="actionClose"/>
+     <addaction name="actionConnect4"/>
+     <addaction name="actionConnect8"/>
+    </widget>
+    <addaction name="actionRGB2Gray"/>
+    <addaction name="actionNegative"/>
+    <addaction name="actionBitPlane"/>
+    <addaction name="actionHistogram"/>
+    <addaction name="actionHistEqualization"/>
+    <addaction name="menuFilter"/>
+    <addaction name="menuBinary"/>
+    <addaction name="actionScale"/>
+    <addaction name="actionRotate"/>
+    <addaction name="menuMorpology"/>
+   </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+   </widget>
+   <widget class="QMenu" name="menuTeam">
+    <property name="title">
+     <string>Team</string>
+    </property>
+    <addaction name="actionIntroduction"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuIP"/>
+   <addaction name="menuTeam"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionRGB2Gray">
+   <property name="text">
+    <string>RGB2Gray</string>
+   </property>
+  </action>
+  <action name="actionOTSU">
+   <property name="text">
+    <string>OTSU</string>
+   </property>
+  </action>
+  <action name="actionIntroduction">
+   <property name="text">
+    <string>Introduction</string>
+   </property>
+  </action>
+  <action name="actionNegative">
+   <property name="text">
+    <string>Negative</string>
+   </property>
+  </action>
+  <action name="actionCustomize">
+   <property name="text">
+    <string>Customize</string>
+   </property>
+  </action>
+  <action name="actionScale">
+   <property name="text">
+    <string>Scale</string>
+   </property>
+  </action>
+  <action name="actionBitPlane">
+   <property name="text">
+    <string>BitPlane</string>
+   </property>
+  </action>
+  <action name="actionRotate">
+   <property name="text">
+    <string>Rotate</string>
+   </property>
+  </action>
+  <action name="actionHistogram">
+   <property name="text">
+    <string>Histogram</string>
+   </property>
+  </action>
+  <action name="actionHistEqualization">
+   <property name="text">
+    <string>HistEqualization</string>
+   </property>
+  </action>
+  <action name="actionSobel">
+   <property name="text">
+    <string>Sobel</string>
+   </property>
+  </action>
+  <action name="actionPrewitt">
+   <property name="text">
+    <string>Prewitt</string>
+   </property>
+  </action>
+  <action name="actionMedian">
+   <property name="text">
+    <string>Median</string>
+   </property>
+  </action>
+  <action name="actionDilation">
+   <property name="text">
+    <string>Dilation</string>
+   </property>
+  </action>
+  <action name="actionErosion">
+   <property name="text">
+    <string>Erosion</string>
+   </property>
+  </action>
+  <action name="actionOpen_2">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionConnect4">
+   <property name="text">
+    <string>Connect4</string>
+   </property>
+  </action>
+  <action name="actionConnect8">
+   <property name="text">
+    <string>Connect8</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
