@@ -43,6 +43,8 @@ public:
     QAction *actionClose;
     QAction *actionConnect4;
     QAction *actionConnect8;
+    QAction *actionLine_Detect;
+    QAction *actionCircle_Detect;
     QWidget *centralwidget;
     QMenuBar *menubar;
     QMenu *menuIP;
@@ -98,6 +100,10 @@ public:
         actionConnect4->setObjectName("actionConnect4");
         actionConnect8 = new QAction(MainWindow);
         actionConnect8->setObjectName("actionConnect8");
+        actionLine_Detect = new QAction(MainWindow);
+        actionLine_Detect->setObjectName("actionLine_Detect");
+        actionCircle_Detect = new QAction(MainWindow);
+        actionCircle_Detect->setObjectName("actionCircle_Detect");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         MainWindow->setCentralWidget(centralwidget);
@@ -134,6 +140,8 @@ public:
         menuIP->addAction(actionScale);
         menuIP->addAction(actionRotate);
         menuIP->addAction(menuMorpology->menuAction());
+        menuIP->addAction(actionLine_Detect);
+        menuIP->addAction(actionCircle_Detect);
         menuBinary->addAction(actionOTSU);
         menuFilter->addAction(actionCustomize);
         menuFilter->addAction(actionSobel);
@@ -176,6 +184,8 @@ public:
         actionClose->setText(QCoreApplication::translate("MainWindow", "Close", nullptr));
         actionConnect4->setText(QCoreApplication::translate("MainWindow", "Connect4", nullptr));
         actionConnect8->setText(QCoreApplication::translate("MainWindow", "Connect8", nullptr));
+        actionLine_Detect->setText(QCoreApplication::translate("MainWindow", "Line Detect", nullptr));
+        actionCircle_Detect->setText(QCoreApplication::translate("MainWindow", "Circle Detect", nullptr));
         menuIP->setTitle(QCoreApplication::translate("MainWindow", "IP", nullptr));
         menuBinary->setTitle(QCoreApplication::translate("MainWindow", "Binary", nullptr));
         menuFilter->setTitle(QCoreApplication::translate("MainWindow", "Filter", nullptr));

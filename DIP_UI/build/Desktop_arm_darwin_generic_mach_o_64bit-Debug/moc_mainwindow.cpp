@@ -61,7 +61,9 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "on_actionOpen_2_triggered",
         "on_actionClose_triggered",
         "on_actionConnect4_triggered",
-        "on_actionConnect8_triggered"
+        "on_actionConnect8_triggered",
+        "on_actionLine_Detect_triggered",
+        "on_actionCircle_Detect_triggered"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -107,6 +109,10 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(21, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_actionConnect8_triggered'
         QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_actionLine_Detect_triggered'
+        QtMocHelpers::SlotData<void()>(23, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_actionCircle_Detect_triggered'
+        QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -151,6 +157,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 18: _t->on_actionClose_triggered(); break;
         case 19: _t->on_actionConnect4_triggered(); break;
         case 20: _t->on_actionConnect8_triggered(); break;
+        case 21: _t->on_actionLine_Detect_triggered(); break;
+        case 22: _t->on_actionCircle_Detect_triggered(); break;
         default: ;
         }
     }
@@ -176,14 +184,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 21)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 21;
+        _id -= 23;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 21)
+        if (_id < 23)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 21;
+        _id -= 23;
     }
     return _id;
 }

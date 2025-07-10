@@ -64,6 +64,10 @@ private slots:
 
     void on_actionConnect8_triggered();
 
+    void on_actionLine_Detect_triggered();
+
+    void on_actionCircle_Detect_triggered();
+
 private:
     Ui::MainWindow *ui;
     DIP DIP;

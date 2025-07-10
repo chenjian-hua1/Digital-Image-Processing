@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Library/Developer/CommandLineTools/usr/bin/clang
 CXX           = /Library/Developer/CommandLineTools/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra $(DEFINES)
-INCPATH       = -I../../../DIP_UI -I. -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib
+INCPATH       = -I../../../DIP_UI -I. -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib
 QMAKE         = /opt/homebrew/opt/qt/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = DIP_UI1.0.0
 DISTDIR = /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/.tmp/DIP_UI1.0.0
 LINK          = /Library/Developer/CommandLineTools/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/opt/homebrew/lib
-LIBS          = $(SUBLIBS) -F/opt/homebrew/lib -framework QtCharts -framework QtOpenGLWidgets -framework QtWidgets -framework QtOpenGL -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework AGL -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/opt/homebrew/lib -framework QtCharts -framework QtOpenGLWidgets -framework QtMultimediaWidgets -framework QtWidgets -framework QtOpenGL -framework QtMultimedia -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtNetwork -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework AGL -framework OpenGL   
 AR            = /Library/Developer/CommandLineTools/usr/bin/ar cq
 RANLIB        = /Library/Developer/CommandLineTools/usr/bin/ranlib -s
 SED           = sed
@@ -60,13 +60,15 @@ SOURCES       = ../../bitplaneform.cpp \
 		../../mainwindow.cpp \
 		../../rotateform.cpp \
 		../../scaleform.cpp \
-		../../teamform.cpp moc_bitplaneform.cpp \
+		../../teamform.cpp \
+		../../videoform.cpp moc_bitplaneform.cpp \
 		moc_filterform.cpp \
 		moc_imgform.cpp \
 		moc_mainwindow.cpp \
 		moc_rotateform.cpp \
 		moc_scaleform.cpp \
-		moc_teamform.cpp
+		moc_teamform.cpp \
+		moc_videoform.cpp
 OBJECTS       = bitplaneform.o \
 		dip.o \
 		filterform.o \
@@ -76,13 +78,15 @@ OBJECTS       = bitplaneform.o \
 		rotateform.o \
 		scaleform.o \
 		teamform.o \
+		videoform.o \
 		moc_bitplaneform.o \
 		moc_filterform.o \
 		moc_imgform.o \
 		moc_mainwindow.o \
 		moc_rotateform.o \
 		moc_scaleform.o \
-		moc_teamform.o
+		moc_teamform.o \
+		moc_videoform.o
 DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/share/qt/mkspecs/features/device_config.prf \
 		/opt/homebrew/Cellar/qt/6.9.1/share/qt/mkspecs/common/unix.conf \
@@ -464,7 +468,8 @@ DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		../../mainwindow.h \
 		../../rotateform.h \
 		../../scaleform.h \
-		../../teamform.h ../../bitplaneform.cpp \
+		../../teamform.h \
+		../../videoform.h ../../bitplaneform.cpp \
 		../../dip.cpp \
 		../../filterform.cpp \
 		../../imgform.cpp \
@@ -472,7 +477,8 @@ DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		../../mainwindow.cpp \
 		../../rotateform.cpp \
 		../../scaleform.cpp \
-		../../teamform.cpp
+		../../teamform.cpp \
+		../../videoform.cpp
 QMAKE_TARGET  = DIP_UI
 DESTDIR       = 
 TARGET        = DIP_UI.app/Contents/MacOS/DIP_UI
@@ -493,7 +499,7 @@ include /opt/homebrew/Cellar/qt/6.9.1/share/qt/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-DIP_UI.app/Contents/MacOS/DIP_UI: ui_bitplaneform.h ui_filterform.h ui_imgform.h ui_mainwindow.h ui_rotateform.h ui_scaleform.h ui_teamform.h $(OBJECTS)  
+DIP_UI.app/Contents/MacOS/DIP_UI: ui_bitplaneform.h ui_filterform.h ui_imgform.h ui_mainwindow.h ui_rotateform.h ui_scaleform.h ui_teamform.h ui_videoform.h $(OBJECTS)  
 	@test -d DIP_UI.app/Contents/MacOS/ || mkdir -p DIP_UI.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -873,9 +879,12 @@ Makefile: ../../DIP_UI.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf 
 		../../DIP_UI.pro \
 		/opt/homebrew/lib/QtCharts.framework/Resources/QtCharts.prl \
 		/opt/homebrew/lib/QtOpenGLWidgets.framework/Resources/QtOpenGLWidgets.prl \
+		/opt/homebrew/lib/QtMultimediaWidgets.framework/Resources/QtMultimediaWidgets.prl \
 		/opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/opt/homebrew/lib/QtOpenGL.framework/Resources/QtOpenGL.prl \
+		/opt/homebrew/lib/QtMultimedia.framework/Resources/QtMultimedia.prl \
 		/opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl \
+		/opt/homebrew/lib/QtNetwork.framework/Resources/QtNetwork.prl \
 		/opt/homebrew/lib/QtCore.framework/Resources/QtCore.prl
 	$(QMAKE) -o Makefile ../../DIP_UI.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
 /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf:
@@ -1254,9 +1263,12 @@ Makefile: ../../DIP_UI.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf 
 ../../DIP_UI.pro:
 /opt/homebrew/lib/QtCharts.framework/Resources/QtCharts.prl:
 /opt/homebrew/lib/QtOpenGLWidgets.framework/Resources/QtOpenGLWidgets.prl:
+/opt/homebrew/lib/QtMultimediaWidgets.framework/Resources/QtMultimediaWidgets.prl:
 /opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /opt/homebrew/lib/QtOpenGL.framework/Resources/QtOpenGL.prl:
+/opt/homebrew/lib/QtMultimedia.framework/Resources/QtMultimedia.prl:
 /opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl:
+/opt/homebrew/lib/QtNetwork.framework/Resources/QtNetwork.prl:
 /opt/homebrew/lib/QtCore.framework/Resources/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../../DIP_UI.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
@@ -1283,9 +1295,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../DIP_Struct.h ../../bitplaneform.h ../../dip.h ../../filterform.h ../../imgform.h ../../mainwindow.h ../../rotateform.h ../../scaleform.h ../../teamform.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../bitplaneform.cpp ../../dip.cpp ../../filterform.cpp ../../imgform.cpp ../../main.cpp ../../mainwindow.cpp ../../rotateform.cpp ../../scaleform.cpp ../../teamform.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../bitplaneform.ui ../../filterform.ui ../../imgform.ui ../../mainwindow.ui ../../rotateform.ui ../../scaleform.ui ../../teamform.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../../DIP_Struct.h ../../bitplaneform.h ../../dip.h ../../filterform.h ../../imgform.h ../../mainwindow.h ../../rotateform.h ../../scaleform.h ../../teamform.h ../../videoform.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bitplaneform.cpp ../../dip.cpp ../../filterform.cpp ../../imgform.cpp ../../main.cpp ../../mainwindow.cpp ../../rotateform.cpp ../../scaleform.cpp ../../teamform.cpp ../../videoform.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bitplaneform.ui ../../filterform.ui ../../imgform.ui ../../mainwindow.ui ../../rotateform.ui ../../scaleform.ui ../../teamform.ui ../../videoform.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1320,9 +1332,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp
 	/Library/Developer/CommandLineTools/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra -dM -E -o moc_predefs.h /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_bitplaneform.cpp moc_filterform.cpp moc_imgform.cpp moc_mainwindow.cpp moc_rotateform.cpp moc_scaleform.cpp moc_teamform.cpp
+compiler_moc_header_make_all: moc_bitplaneform.cpp moc_filterform.cpp moc_imgform.cpp moc_mainwindow.cpp moc_rotateform.cpp moc_scaleform.cpp moc_teamform.cpp moc_videoform.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_bitplaneform.cpp moc_filterform.cpp moc_imgform.cpp moc_mainwindow.cpp moc_rotateform.cpp moc_scaleform.cpp moc_teamform.cpp
+	-$(DEL_FILE) moc_bitplaneform.cpp moc_filterform.cpp moc_imgform.cpp moc_mainwindow.cpp moc_rotateform.cpp moc_scaleform.cpp moc_teamform.cpp moc_videoform.cpp
 moc_bitplaneform.cpp: ../../bitplaneform.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -1334,7 +1346,7 @@ moc_bitplaneform.cpp: ../../bitplaneform.h \
 		../../DIP_Struct.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../bitplaneform.h -o moc_bitplaneform.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../bitplaneform.h -o moc_bitplaneform.cpp
 
 moc_filterform.cpp: ../../filterform.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
@@ -1347,14 +1359,14 @@ moc_filterform.cpp: ../../filterform.h \
 		../../DIP_Struct.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../filterform.h -o moc_filterform.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../filterform.h -o moc_filterform.cpp
 
 moc_imgform.cpp: ../../imgform.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../imgform.h -o moc_imgform.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../imgform.h -o moc_imgform.cpp
 
 moc_mainwindow.cpp: ../../mainwindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
@@ -1369,7 +1381,7 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../DIP_Struct.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../mainwindow.h -o moc_mainwindow.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../mainwindow.h -o moc_mainwindow.cpp
 
 moc_rotateform.cpp: ../../rotateform.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
@@ -1382,7 +1394,7 @@ moc_rotateform.cpp: ../../rotateform.h \
 		../../DIP_Struct.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../rotateform.h -o moc_rotateform.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../rotateform.h -o moc_rotateform.cpp
 
 moc_scaleform.cpp: ../../scaleform.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
@@ -1395,22 +1407,33 @@ moc_scaleform.cpp: ../../scaleform.h \
 		../../DIP_Struct.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../scaleform.h -o moc_scaleform.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../scaleform.h -o moc_scaleform.cpp
 
 moc_teamform.cpp: ../../teamform.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../teamform.h -o moc_teamform.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../teamform.h -o moc_teamform.cpp
+
+moc_videoform.cpp: ../../videoform.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
+		/opt/homebrew/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/opt/homebrew/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers/QVideoWidget \
+		/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers/qvideowidget.h \
+		moc_predefs.h \
+		/opt/homebrew/share/qt/libexec/moc
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/chenjianhua/Downloads/DIP_UI/build/Desktop_arm_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/chenjianhua/Downloads/DIP_UI -I/opt/homebrew/lib/QtCharts.framework/Headers -I/opt/homebrew/lib/QtOpenGLWidgets.framework/Headers -I/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtOpenGL.framework/Headers -I/opt/homebrew/lib/QtMultimedia.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtNetwork.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../videoform.h -o moc_videoform.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_bitplaneform.h ui_filterform.h ui_imgform.h ui_mainwindow.h ui_rotateform.h ui_scaleform.h ui_teamform.h
+compiler_uic_make_all: ui_bitplaneform.h ui_filterform.h ui_imgform.h ui_mainwindow.h ui_rotateform.h ui_scaleform.h ui_teamform.h ui_videoform.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_bitplaneform.h ui_filterform.h ui_imgform.h ui_mainwindow.h ui_rotateform.h ui_scaleform.h ui_teamform.h
+	-$(DEL_FILE) ui_bitplaneform.h ui_filterform.h ui_imgform.h ui_mainwindow.h ui_rotateform.h ui_scaleform.h ui_teamform.h ui_videoform.h
 ui_bitplaneform.h: ../../bitplaneform.ui \
 		/opt/homebrew/share/qt/libexec/uic
 	/opt/homebrew/share/qt/libexec/uic ../../bitplaneform.ui -o ui_bitplaneform.h
@@ -1438,6 +1461,11 @@ ui_scaleform.h: ../../scaleform.ui \
 ui_teamform.h: ../../teamform.ui \
 		/opt/homebrew/share/qt/libexec/uic
 	/opt/homebrew/share/qt/libexec/uic ../../teamform.ui -o ui_teamform.h
+
+ui_videoform.h: ../../videoform.ui \
+		/opt/homebrew/share/qt/libexec/uic \
+		/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers/qvideowidget.h
+	/opt/homebrew/share/qt/libexec/uic ../../videoform.ui -o ui_videoform.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -1504,12 +1532,66 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
-mainwindow.o: ../../mainwindow.cpp /opt/homebrew/lib/QtWidgets.framework/Headers/QMdiSubWindow \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/qmdisubwindow.h \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/QDockWidget \
+mainwindow.o: ../../mainwindow.cpp /opt/homebrew/lib/QtWidgets.framework/Headers/QDockWidget \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qdockwidget.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QFileDialog \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/QtCharts \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qchartglobal.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qabstractaxis.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qabstractbarseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qabstractseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qarealegendmarker.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qareaseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qbarcategoryaxis.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qbarlegendmarker.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qbarmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qbarseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qbarset.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qboxplotlegendmarker.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qboxplotmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qboxplotseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qboxset.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qcandlesticklegendmarker.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qcandlestickmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qcandlestickseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qcandlestickset.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qcategoryaxis.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qchart.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qchartview.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qcoloraxis.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qdatetimeaxis.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qhbarmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qhboxplotmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qhcandlestickmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qhorizontalbarseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qhorizontalpercentbarseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qhorizontalstackedbarseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qhpiemodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qhxymodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qlegend.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qlegendmarker.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qlineseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qlogvalueaxis.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qpercentbarseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qpielegendmarker.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qpiemodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qpieseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qpieslice.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qpolarchart.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qscatterseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qsplineseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qstackedbarseries.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qtchartsversion.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qvalueaxis.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qvbarmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qvboxplotmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qvcandlestickmodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qvpiemodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qvxymodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qxylegendmarker.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qxymodelmapper.h \
+		/opt/homebrew/lib/QtCharts.framework/Headers/qxyseries.h \
 		../../mainwindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -1526,6 +1608,11 @@ mainwindow.o: ../../mainwindow.cpp /opt/homebrew/lib/QtWidgets.framework/Headers
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../imgform.h \
+		../../videoform.h \
+		/opt/homebrew/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/opt/homebrew/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers/QVideoWidget \
+		/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers/qvideowidget.h \
 		../../filterform.h \
 		../../scaleform.h \
 		../../bitplaneform.h \
@@ -1562,6 +1649,16 @@ teamform.o: ../../teamform.cpp ../../teamform.h \
 		ui_teamform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o teamform.o ../../teamform.cpp
 
+videoform.o: ../../videoform.cpp ../../videoform.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
+		/opt/homebrew/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/opt/homebrew/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers/QVideoWidget \
+		/opt/homebrew/lib/QtMultimediaWidgets.framework/Headers/qvideowidget.h \
+		ui_videoform.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videoform.o ../../videoform.cpp
+
 moc_bitplaneform.o: moc_bitplaneform.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_bitplaneform.o moc_bitplaneform.cpp
 
@@ -1582,6 +1679,9 @@ moc_scaleform.o: moc_scaleform.cpp
 
 moc_teamform.o: moc_teamform.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_teamform.o moc_teamform.cpp
+
+moc_videoform.o: moc_videoform.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_videoform.o moc_videoform.cpp
 
 ####### Install
 

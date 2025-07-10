@@ -6,6 +6,7 @@
 #include "ui_mainwindow.h"
 #include "teamform.h"
 #include "imgform.h"
+#include "videoform.h"
 #include "filterform.h"
 #include "scaleform.h"
 #include "bitplaneform.h"
@@ -86,11 +87,11 @@ void MainWindow::on_actionOpen_triggered()
 {
     // Open File Manager
     QString fileName = QFileDialog::getOpenFileName(
-        this,                                   // 父視窗
-        tr("Open File"),                        // 對話框標題
-        QDir::homePath(),                       // 起始目錄
-        tr("All Files (*);;Text Files (*.txt);;Image Files (*.bmp)") // 檔案篩選器
-    );
+        this,
+        tr("Open File"),
+        QDir::homePath(),
+        tr("All Files (*);;Image Files (*.bmp *.png *.jpg *.jpeg);;Video Files (*.mp4 *.avi *.mov *.mkv)")
+        );
 
     // NonSelect
     if (fileName.isEmpty()) {
@@ -99,21 +100,34 @@ void MainWindow::on_actionOpen_triggered()
     }
     qDebug() << "Selected file:" << fileName;
 
-    // Load Image
-    orginImage = QImage(fileName);
-    // Load Success?
-    if (orginImage.isNull()) {
-        qDebug() << "Error: Invaild File";
+    // 嘗試載入圖片
+    QImage orginImage(fileName);
+    if (!orginImage.isNull()) {
+        // 成功讀取圖片
+        DIP.QImage2Array(orginImage, imageArray);
+        width = orginImage.width();
+        height = orginImage.height();
+        qDebug() << "Image size:" << width << "x" << height;
+
+        // 顯示圖片
+        ImgForm *imgform = new ImgForm(orginImage);
+        NewForm(imgform, "Image");
         return;
     }
 
-    // Display Image on Form
-    DIP.QImage2Array(orginImage, imageArray);
-    width = orginImage.width(); height = orginImage.height();
-    qDebug() << "Image size:" << width << "x" << height;
+    // 檢查是否是影片檔案（副檔名）
+    QString ext = QFileInfo(fileName).suffix().toLower();
+    QStringList videoExtensions = {"mp4", "avi", "mov", "mkv", "wmv"};
+    if (videoExtensions.contains(ext)) {
+        // 顯示影片
+        VideoForm *videoform = new VideoForm(fileName, this);
+        NewForm(videoform, "Video");
+        return;
+    }
 
-    ImgForm *imgform = new ImgForm(orginImage);
-    NewForm(imgform, "Image");
+    // 既不是圖片也不是影片
+    qDebug() << "Error: Unsupported file type";
+    QMessageBox::warning(this, tr("Unsupported File"), tr("This file type is not supported."));
 }
 
 
@@ -318,3 +332,14 @@ void MainWindow::on_actionConnect8_triggered()
     delete[] binzImage;
 }
 
+
+void MainWindow::on_actionLine_Detect_triggered()
+{
+    DIP.lineDetect(imageArray, width, height, 4, 1, 3);
+}
+
+
+void MainWindow::on_actionCircle_Detect_triggered()
+{
+    DIP.CircleDetect(imageArray, width, height, 5, 2);
+}

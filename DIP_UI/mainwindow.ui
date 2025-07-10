@@ -63,6 +63,8 @@
     <addaction name="actionScale"/>
     <addaction name="actionRotate"/>
     <addaction name="menuMorpology"/>
+    <addaction name="actionLine_Detect"/>
+    <addaction name="actionCircle_Detect"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -179,6 +181,16 @@
   <action name="actionConnect8">
    <property name="text">
     <string>Connect8</string>
+   </property>
+  </action>
+  <action name="actionLine_Detect">
+   <property name="text">
+    <string>Line Detect</string>
+   </property>
+  </action>
+  <action name="actionCircle_Detect">
+   <property name="text">
+    <string>Circle Detect</string>
    </property>
   </action>
  </widget>

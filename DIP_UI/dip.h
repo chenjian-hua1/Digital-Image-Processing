@@ -44,6 +44,8 @@ public:
     static void close(const int *f, int *&g, int w, int h);
     static void connect4(const int *f, int *&labels, int &totalLabel, int w, int h);
     static void connect8(const int *f, int *&labels, int &totalLabel, int w, int h);
+    static double CalculateDist(Point pt1, Point pt2);
+    static void lineDetect(const int* f, int w, int h, int Pt_th, int ThetaStep, double PtDistTolerance=2*sqrt(2.0));
 };
 
 #endif // DIP_H

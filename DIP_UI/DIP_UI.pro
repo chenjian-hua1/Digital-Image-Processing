@@ -17,7 +17,8 @@ SOURCES += \
     mainwindow.cpp \
     rotateform.cpp \
     scaleform.cpp \
-    teamform.cpp
+    teamform.cpp \
+    videoform.cpp
 
 HEADERS += \
     DIP_Struct.h \
@@ -28,7 +29,8 @@ HEADERS += \
     mainwindow.h \
     rotateform.h \
     scaleform.h \
-    teamform.h
+    teamform.h \
+    videoform.h
 
 FORMS += \
     bitplaneform.ui \
@@ -37,10 +39,11 @@ FORMS += \
     mainwindow.ui \
     rotateform.ui \
     scaleform.ui \
-    teamform.ui
+    teamform.ui \
+    videoform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-QT += charts
+QT += charts core gui multimedia multimediawidgets
