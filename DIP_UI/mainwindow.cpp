@@ -101,7 +101,7 @@ void MainWindow::on_actionOpen_triggered()
     qDebug() << "Selected file:" << fileName;
 
     // 嘗試載入圖片
-    QImage orginImage(fileName);
+    orginImage = QImage(fileName);
     if (!orginImage.isNull()) {
         // 成功讀取圖片
         DIP.QImage2Array(orginImage, imageArray);
@@ -114,20 +114,21 @@ void MainWindow::on_actionOpen_triggered()
         NewForm(imgform, "Image");
         return;
     }
+    else {
+        // 檢查是否是影片檔案（副檔名）
+        QString ext = QFileInfo(fileName).suffix().toLower();
+        QStringList videoExtensions = {"mp4", "avi", "mov", "mkv", "wmv"};
+        if (videoExtensions.contains(ext)) {
+            // 顯示影片
+            VideoForm *videoform = new VideoForm(fileName, this);
+            NewForm(videoform, "Video");
+            return;
+        }
 
-    // 檢查是否是影片檔案（副檔名）
-    QString ext = QFileInfo(fileName).suffix().toLower();
-    QStringList videoExtensions = {"mp4", "avi", "mov", "mkv", "wmv"};
-    if (videoExtensions.contains(ext)) {
-        // 顯示影片
-        VideoForm *videoform = new VideoForm(fileName, this);
-        NewForm(videoform, "Video");
-        return;
+        // 既不是圖片也不是影片
+        qDebug() << "Error: Unsupported file type";
+        QMessageBox::warning(this, tr("Unsupported File"), tr("This file type is not supported."));
     }
-
-    // 既不是圖片也不是影片
-    qDebug() << "Error: Unsupported file type";
-    QMessageBox::warning(this, tr("Unsupported File"), tr("This file type is not supported."));
 }
 
 
