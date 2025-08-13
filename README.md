@@ -1,1 +1,1 @@
-# **Digtital Image Processing**
+# **Digital Image Processing**
