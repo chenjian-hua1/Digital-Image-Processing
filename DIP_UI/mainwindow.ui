@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>1127</width>
-     <height>24</height>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuIP">
@@ -65,6 +65,7 @@
     <addaction name="menuMorpology"/>
     <addaction name="actionLine_Detect"/>
     <addaction name="actionCircle_Detect"/>
+    <addaction name="actionAutoFocus"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -191,6 +192,11 @@
   <action name="actionCircle_Detect">
    <property name="text">
     <string>Circle Detect</string>
+   </property>
+  </action>
+  <action name="actionAutoFocus">
+   <property name="text">
+    <string>AutoFocus</string>
    </property>
   </action>
  </widget>

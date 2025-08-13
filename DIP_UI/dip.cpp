@@ -863,3 +863,18 @@ void DIP::lineDetect(const int *f, int w, int h, int Pt_th, int ThetaStep, doubl
     delete[] LineLastPt;
     delete[] r_pts;
 }
+
+void DIP::calEdgeIntensity(int **f, int *intensitys, int num_imgs, int w, int h)
+{
+    for (int i=0; i<num_imgs; i++) {
+        int *g, gw, gh;
+        sobel(f[i], g, w, h, gw, gh);
+
+        // Calculate image edge ntensity sum
+        intensitys[i] = 0;
+        for (int p=0; p<gw*gh; p++)
+            intensitys[i]+=g[p];
+
+        delete[] g;
+    }
+}

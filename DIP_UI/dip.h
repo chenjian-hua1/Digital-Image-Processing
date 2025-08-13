@@ -46,6 +46,7 @@ public:
     static void connect8(const int *f, int *&labels, int &totalLabel, int w, int h);
     static double CalculateDist(Point pt1, Point pt2);
     static void lineDetect(const int* f, int w, int h, int Pt_th, int ThetaStep, double PtDistTolerance=2*sqrt(2.0));
+    static void calEdgeIntensity(int **f, int *intensitys, int num_imgs, int w, int h);
 };
 
 #endif // DIP_H

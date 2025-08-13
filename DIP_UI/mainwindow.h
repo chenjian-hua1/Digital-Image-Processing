@@ -20,6 +20,8 @@ public:
     ~MainWindow();
     void NewForm(QWidget *widget, const QString &title, bool floating = true);
     void CreateHistogram(int *histogram, int histW, QPainter &painter);
+    void addTextToImageAndSave(QImage &image, const QString& outputImagePath,
+                               const QString& text, const QPoint& position, const QFont& font, const QColor& textColor);
 
 private slots:
     void on_actionRGB2Gray_triggered();
@@ -67,6 +69,8 @@ private slots:
     void on_actionLine_Detect_triggered();
 
     void on_actionCircle_Detect_triggered();
+
+    void on_actionAutoFocus_triggered();
 
 private:
     Ui::MainWindow *ui;

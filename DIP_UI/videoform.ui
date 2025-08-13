@@ -48,6 +48,26 @@
      <height>331</height>
     </rect>
    </property>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>90</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>asd</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>qwe</string>
+     </property>
+    </item>
+   </widget>
   </widget>
  </widget>
  <customwidgets>
