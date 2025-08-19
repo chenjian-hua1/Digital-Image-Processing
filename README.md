@@ -31,6 +31,74 @@
 
 ## 影像濾波器(Filter)
 
+### &rarr; 平均濾波器
+:bulb: 局部平均化可將原本高亮度值壓低，達到模糊效果即低通濾波器
+![image](https://hackmd.io/_uploads/rk1cUoxtee.jpg)
+
+
+### &rarr; 高斯濾波器
+:bulb: 雖然跟平均濾波器都是低通濾波器，都可以達到模糊效果，但差在高斯比較能保留原始圖片特性，越靠近處理點的位置權重越重，盡可能凸顯原始的亮度，不是像平均給同樣的係數  
+![1Hews6M](https://hackmd.io/_uploads/rJD5Fogtxx.png)
+
+### &rarr; Sobel 邊緣偵測
+:bulb: 更重視中間區域的變化 濾波器係數為 (2,-2)，如果中間變化值較大時像 255,0 時->$255*2-0*(-2)=510$，相較濾波器係數為 (1,-1) 時強度多兩倍 
+
+![sobmasks](https://hackmd.io/_uploads/SkFlXiltlx.gif)
+
+標準版本->  
+$Out=\sqrt{G_x^2+G_y^2}$
+
+簡易版本->  
+$Out=|G_x|+|G_y|$
+
+### &rarr; Prewitt 邊緣偵測
+:bulb: 相較 Sobel 運算子Prewitt會平均抓三區塊的變化值去算邊緣的強度值，三區塊的濾波器係數都為 (1,-1)。  
+:pushpin: 邊緣偵測是抓出兩側的變化值大認定爲邊緣，因此邊緣偵測是高通濾波器！
+![image](https://hackmd.io/_uploads/rk9FzilFxg.png)
+
+標準版本->  
+$Out=\sqrt{G_x^2+G_y^2}$
+
+簡易版本->  
+$Out=|G_x|+|G_y|$
+
+### &rarr; 中值濾波器
+:bulb: 用於消除胡椒鹽雜訊(局部只有一兩個點異常變化)，採用取局部中值方式可避開這些極少數點  
+![1484949784-577764374](https://hackmd.io/_uploads/ByVEqoxFxe.png)
+> Souce： https://honglung.pixnet.net/blog/post/85115497
+
+### &rarr; 例題
+![image](https://hackmd.io/_uploads/r1xnojeKxl.png)
+
+(1) High Pass：  
+(2) Low Pass：  
+(3) Unsharp：  
+(4) Average：  
+(5) Gaussian：  
+(6) Second Derivative：  
+(7) Denoise：  
+(8) Smooth：
+
+:::spoiler 解釋
+:bulb: 簡單分辨法 ->  
+&nbsp; &nbsp; &nbsp;高通：係數總和為 0  
+&nbsp; &nbsp; &nbsp;低通：係數總和為 1  
+&nbsp; &nbsp; &nbsp;但有特殊情況不符合，像是係數正負值都有時基本上都不是低通
+
+a -> $45^\circ$ 邊緣, High Pass  
+b -> 中心亮度突出偵測(類似邊緣偵測)，總合也為0所以是 High Pass  
+c -> 總和為1但不是 Low Pass，而是更強調中心是高亮度值的區塊，否則如果區塊中心與周遭部分差不多或更小時，該點會被其他周圍點減到消失(係數中心是正 周圍負)，這個就是「銳化」  
+d -> 平均濾波器, Low Pass  
+e -> $135^\circ$ 邊緣, High Pass  
+f -> 垂直邊緣, High Pass  
+g -> 與 b 相同，High Pass  
+h -> 中心係數高周遭係數大小下降，高斯濾波器, Low Pass  
+i -> 見 c ，如果局部數值都差不多甚至是中心較小時，經過該處理會消失留下中心較亮的部分，可以做銳化  
+j -> 保留中心亮度值，所以處理完還是原本圖片，不是 High 也不是 Low Pass  
+k -> 垂直邊緣(Sobel), High Pass  
+l -> $45^\circ$ 邊緣, High Pass  
+m -> 見 h 說明，高斯濾波器, Low Pass
+:::
 
 
 ## OTSU 門檻值分割
@@ -49,11 +117,13 @@
 
 ## 影像倍率縮放
 ### &rarr; 基本方法
+---
 :bulb: 使用線性方程式 $\frac{y-1}{x-1}$ = $\frac{w_y-1}{w_x-1}$ -> (移項後)${x}=\frac{w_y-1}{w_x-1}(y-1)+1$ 帶入縮放圖片位置($y$)求出原始圖片位置($x$)
 
 &nbsp; &nbsp; &nbsp;${y}$->縮放後影像位置 ${x}$->縮放前影像位置 ${w_y}$->縮放後長度 ${w_x}$->縮放前長度
 
 ### &rarr; 進階1 - 鄰近補值
+---
 :information_source: 因為縮放後圖片位置 逆求 原始影像位置不一定整數
 
 :bulb: 鄰近補值->取最近的點作為結果(四捨五入)
@@ -62,6 +132,7 @@
 
 
 ### &rarr; 進階2 - 線性插值
+---
 :bulb: 線性插值->做鄰近點的加權平均(離越近的點加權越重)
 
 :information_source: $ans=p_l*(1-α)+p_r*α$
@@ -84,25 +155,24 @@ $ans=p_l*(1-α)+p_r*α$
 
 
 ### &rarr; 進階2.1 - 二維影像線性插值
-
+---
 :bulb: 上下邊先各自求左右兩側的線性插值 -> $OUT=DOWN*(1-β)+UP*β$
 
 ![image](https://hackmd.io/_uploads/Sklvluhdxg.png)
 
-Pre Step ->
 
-$α=x_c-floor(x_c)$ 
-
+:pencil2: Pre Step ->
+---
+$α=x_c-floor(x_c)$  
 $β=y_c-floor(y_c)$
 
-Step 1 ->
-
-$UP=LeftUp*(1-α)+RightUp*α$
-
+:pencil2: Step 1 ->
+---
+$UP=LeftUp*(1-α)+RightUp*α$  
 $DOWN=LeftDown*(1-α)+RightDown*α$
 
-Step 2 ->
-
+:pencil2: Step 2 ->
+---
 $OUT=DOWN*(1-β)+UP*β$
 
 
@@ -136,14 +206,27 @@ $nh=w*sinθ+h*cosθ$
 
 ### &rarr; 旋轉後亮度值
 
-Step 1 -> 反旋轉(要考慮中心點旋轉)  
+:pencil2: Step 1 -> 反旋轉(要考慮中心點旋轉)
+---
 :bulb: 反旋轉方程只是將原本旋轉方程的 θ -> -θ
 ![image](https://hackmd.io/_uploads/rkBe3Fh_le.png)
 
-Step 2 -> 使用線性內插法或鄰近補值法(反旋轉後非整數)
+:pencil2: Step 2
+---
+使用線性內插法或鄰近補值法(反旋轉後非整數)
 
 
 ## 連通標記
+
+:bulb: 四連通的結構元素是看左跟上，所以該點的左,上有 label 值時，代表該點label與周圍的label為同一連通區塊可合併，連通區塊總數為獨立 label 值數量
+![diagram](https://hackmd.io/_uploads/S1cUw3Ztxe.jpg)
+> Source：https://zhajiman.github.io/post/connected_component_labelling/
+
+:pushpin: 八連通差在結構元素而已，方法與四連通都一樣。  
+結構元素在程式碼時只要看 x->掃描點和左,上區域就好(已掃描區塊)，因為掃描由左到右上到下，當前掃描點右邊下面是還沒看過的區塊！
+![image](https://hackmd.io/_uploads/BJr-93ZYll.jpg)
+
+a->四連通 b->八連通
 
 
 ## 自動對焦
