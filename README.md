@@ -155,24 +155,23 @@ $ans=p_l*(1-α)+p_r*α$
 
 
 ### &rarr; 進階2.1 - 二維影像線性插值
----
+
 :bulb: 上下邊先各自求左右兩側的線性插值 -> $OUT=DOWN*(1-β)+UP*β$
 
 ![image](https://hackmd.io/_uploads/Sklvluhdxg.png)
 
 
-:pencil2: Pre Step ->
----
+:pencil2: Pre Step ->  
 $α=x_c-floor(x_c)$  
 $β=y_c-floor(y_c)$
 
-:pencil2: Step 1 ->
----
+:pencil2: Step 1 ->  
+
 $UP=LeftUp*(1-α)+RightUp*α$  
 $DOWN=LeftDown*(1-α)+RightDown*α$
 
-:pencil2: Step 2 ->
----
+:pencil2: Step 2 ->  
+
 $OUT=DOWN*(1-β)+UP*β$
 
 
@@ -206,13 +205,11 @@ $nh=w*sinθ+h*cosθ$
 
 ### &rarr; 旋轉後亮度值
 
-:pencil2: Step 1 -> 反旋轉(要考慮中心點旋轉)
----
+:pencil2: Step 1 -> 反旋轉(要考慮中心點旋轉)  
 :bulb: 反旋轉方程只是將原本旋轉方程的 θ -> -θ
 ![image](https://hackmd.io/_uploads/rkBe3Fh_le.png)
 
-:pencil2: Step 2
----
+:pencil2: Step 2  
 使用線性內插法或鄰近補值法(反旋轉後非整數)
 
 
