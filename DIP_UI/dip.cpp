@@ -655,13 +655,7 @@ void DIP::connect4(const int *f, int *&labels, int &totalLabel, int w, int h)
                 labels[y * w + x] = minLabel;
 
                 // 找根合併 -> 尋找多個連通子區塊的最小、最大標籤
-                while (convTable[minLabel] != minLabel)
-                    minLabel = convTable[minLabel];
-                while (convTable[maxLabel] != maxLabel)
-                    maxLabel = convTable[maxLabel];
-
-                if (minLabel != maxLabel)
-                    convTable[maxLabel] = minLabel;
+                convTable[maxLabel] = convTable[minLabel];
             }
             else if (left) {
                 labels[y * w + x] = left;
@@ -676,22 +670,15 @@ void DIP::connect4(const int *f, int *&labels, int &totalLabel, int w, int h)
     }
 
     // Pass 2: 替換標籤並計算唯一區塊數
-    bool used[1000] = {false};
     totalLabel = 0;
+    bool used[maxLabels] = {false};
+    for (int pt=0; pt<w*h; pt++) {
+        if (labels[pt]==0) continue;
 
-    for (int pt = 0; pt < w * h; pt++) {
-        int lbl = labels[pt];
-        if (lbl != 0) {
-            // 壓縮路徑 -> 不斷尋找最終指向的最小標籤值
-            while (convTable[lbl] != lbl)
-                lbl = convTable[lbl];
-
-            labels[pt] = lbl;
-
-            if (!used[lbl]) {
-                used[lbl] = true;
-                totalLabel++;
-            }
+        labels[pt] = convTable[labels[pt]];
+        if (!used[labels[pt]]) {
+            used[labels[pt]] = true;
+            totalLabel++;
         }
     }
 
@@ -702,6 +689,7 @@ void DIP::connect8(const int *f, int *&labels, int &totalLabel, int w, int h)
 {
     const int maxLabels = 1000;
     labels = new int[w*h]{0};
+
     int *convTable = new int[maxLabels];
     for (int i=0; i<maxLabels; i++) convTable[i] = i;
 
@@ -712,7 +700,7 @@ void DIP::connect8(const int *f, int *&labels, int &totalLabel, int w, int h)
         for (int x=0; x<w; x++) {
             if (f[y * w + x] == 0) continue;
 
-            // 八連通鄰居
+            // 八連通鄰居 掃描邊界的時候鄰居不會有標注值
             int q = (y > 0 && x > 0)     ? labels[(y-1)*w + (x-1)] : 0;
             int r = (y > 0)              ? labels[(y-1)*w + x]     : 0;
             int s = (y > 0 && x < w-1)   ? labels[(y-1)*w + (x+1)] : 0;
@@ -731,23 +719,10 @@ void DIP::connect8(const int *f, int *&labels, int &totalLabel, int w, int h)
             if (minLabel != maxLabels) {
                 labels[y*w + x] = minLabel;
 
-                // 合併等價關係
-                for (int i=0; i<4; i++) {
-                    int nLabel = neighbors[i];
-                    if (nLabel != 0 && nLabel != minLabel) {
-                        // 找根 -> 最後指像的最小標籤
-                        while (convTable[nLabel] != nLabel)
-                            nLabel = convTable[nLabel];
-                        // 遍歷所有連接的子區塊 尋找最小標籤
-                        while (convTable[minLabel] != minLabel)
-                            minLabel = convTable[minLabel];
-
-                        // 當前label指向最小標籤 小於 之前所有子區塊的最小標籤
-                        // 更新為 之前子區塊的最小標籤
-                        if (nLabel != minLabel)
-                            convTable[nLabel] = minLabel;
-                    }
-                }
+                if (q!=0) convTable[q] = convTable[minLabel];
+                if (r!=0) convTable[r] = convTable[minLabel];
+                if (s!=0) convTable[s] = convTable[minLabel];
+                if (t!=0) convTable[t] = convTable[minLabel];
             }
             else {
                 labels[y*w + x] = ++nowLabel;
@@ -756,22 +731,15 @@ void DIP::connect8(const int *f, int *&labels, int &totalLabel, int w, int h)
     }
 
     // Pass 2: 替換標籤並計算唯一區塊數
-    bool used[1000] = {false};
     totalLabel = 0;
+    bool used[maxLabels] = {false};
+    for (int pt=0; pt<w*h; pt++) {
+        if (labels[pt]==0) continue;
 
-    for (int pt = 0; pt < w * h; pt++) {
-        int lbl = labels[pt];
-        if (lbl != 0) {
-            // 壓縮路徑
-            while (convTable[lbl] != lbl)
-                lbl = convTable[lbl];
-
-            labels[pt] = lbl;
-
-            if (!used[lbl]) {
-                used[lbl] = true;
-                totalLabel++;
-            }
+        labels[pt] = convTable[labels[pt]];
+        if (!used[labels[pt]]) {
+            used[labels[pt]] = true;
+            totalLabel++;
         }
     }
 
