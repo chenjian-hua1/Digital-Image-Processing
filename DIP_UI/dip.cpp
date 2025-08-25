@@ -846,3 +846,15 @@ void DIP::calEdgeIntensity(int **f, int *intensitys, int num_imgs, int w, int h)
         delete[] g;
     }
 }
+
+void DIP::calEdgeIntensity(int *f, int &intensity, int w, int h)
+{
+    int *g, gw, gh;
+    sobel(f, g, w, h, gw, gh);
+
+    intensity = 0;
+    for (int p=0; p<w*h; p++)
+        intensity+=g[p];
+
+    delete[] g;
+}

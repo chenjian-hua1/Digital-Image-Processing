@@ -423,9 +423,8 @@ void MainWindow::on_actionAutoFocus_triggered()
 
         QImage qimg_gray = qimg[i].convertToFormat(QImage::Format_Grayscale8);
         DIP.QImage2Array(qimg_gray, images[i]);
+        DIP.calEdgeIntensity(images[i], edgeIntensitys[i], width, height);
     }
-
-    DIP.calEdgeIntensity(images, edgeIntensitys, numImages, width, height);
 
     // 最大邊緣總值 - 最清晰圖片
     int edgeArgmax = 0;
